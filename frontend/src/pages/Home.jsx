@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { useSnackbar } from 'notistack';
 
 const Home = () => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { enqueueSnackbar} = useSnackbar();
 
     useEffect(() => {
         setLoading(true);
@@ -21,6 +23,8 @@ const Home = () => {
             .catch((error) => {
                 console.log(error);
                 setLoading(false);
+                enqueueSnackbar(`Server not reached  `, { variant:'error'})
+
             })
     },[]);
     return (
